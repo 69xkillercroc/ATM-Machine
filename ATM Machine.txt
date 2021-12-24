@@ -1,0 +1,156 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+// function prototypes
+void printIntroMenu();
+void printMainMenu();
+void start();
+void login();
+void createAccount();
+
+string new_userId, created_userId;
+string new_password, created_password;
+
+double deposit, withdraw;
+double balance = 0;
+char option2, option;
+
+int main()
+{
+    start();
+	return 0;
+}
+
+
+void printIntroMenu(){
+	
+	do{
+		
+		cout << "l->Login \n";
+		cout << "c->Create New Account \n";
+		cout << "q->Quit \n";
+		cin>> option;
+		
+		switch(option){
+			
+			case 'l':
+				login();
+				break;
+				
+			case 'c':
+				createAccount();
+				break;	
+				
+			case 'q':
+				exit(0);
+				break;
+				
+			default: if(option != 'q')
+				cout<< "Invalid option. Please try again" <<endl;
+				cout<<"\n";		
+		}
+		
+	}while(option != 'q');
+	
+	
+}
+
+
+void printMainMenu(){
+	
+	do
+	{
+		cout <<"d-> Deposit Money \n";
+		cout <<"w-> Withdraw Money \n";
+		cout <<"r-> Request Balance \n";
+		cout <<"q-> Quit \n";
+		cin>> option2;
+
+		switch (option2){
+			
+			case 'd': 
+				cout << "Amount of deposit: $";
+			    cin>>deposit;
+				balance += deposit;
+				cout<<"Current Balance: $" << balance <<endl;
+				cout<<"\n";
+				break;
+				
+			case 'w': 
+				cout << "Amount of withdrawal?: $";
+				cin>> withdraw;
+				if(balance > withdraw){
+					balance -= withdraw;
+					cout<<"Current Balance: $" << balance <<endl;
+					cout<<"\n";	
+				}else{
+					cout<<"Your current balance is less than your withdrawal request \n";
+					cout<<"Current Balance: $" << balance <<endl;
+					cout<<"\n";
+				}
+				break;	
+		
+			case 'r': 
+				cout << "Your Balance is: $"<<balance <<endl;
+				cout<<"\n";
+			    break;
+			    
+			case 'q': 
+				cout << "Thanks for stopping by!"<<endl;
+				cout<<"\n";
+				return;
+			    break;
+
+
+		    default: if(option2 != 'q')
+				cout<< "Invalid option. Please try again" <<endl;
+				cout<<"\n";
+			break;
+		}
+
+	} while (option != 'q');
+
+	
+}
+
+void start(){
+	
+	cout << "Please select an option from the menu below: \n";
+	printIntroMenu();
+}
+
+
+void login(){
+		cout << "Please enter your user id: ";
+		cin >> created_userId;
+		cout << "\n";
+		cout << "Please enter your password: ";
+		cin >> created_password;
+		cout << "\n";
+				
+		if(new_userId == created_userId && new_password == created_password){
+			cout << "Access Granted! \n";
+			cout << "\n";
+			printMainMenu();  //If login is successfull, calling printMainMenu Function
+					
+		}else{
+			cout << "******** LOGIN FAILED! ******** \n";
+			cout << "\n";
+		}
+	
+}
+
+
+void createAccount(){
+		cout << "Please enter your user id: ";
+		cin >> new_userId;
+		cout << "\n";
+		cout << "Please enter your password: ";
+		cin >> new_password;
+		cout << "\n";
+		cout << "Thank You! Your account has been created! \n";
+		cout << "\n";
+}
+
